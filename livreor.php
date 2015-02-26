@@ -3,7 +3,7 @@
 Description : Script livre d'or avec antispam simple
 Auteur : Mathieu BIHAN pour Vibrations Libres
 URL : http://vibrationslibres.fr
-License : GNU GPL v2
+Licence : GNU GPL v2
 */
   function date_fran()
   {
