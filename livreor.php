@@ -3,11 +3,8 @@
 Description : Script livre d'or avec antispam simple
 Auteur : Mathieu BIHAN pour Vibrations Libres
 URL : http://vibrationslibres.fr
-License : GNU GPL v3
+License : GNU GPL v2
 */
-?>
-<div style="max-width:100%; height:200px; word-wrap:break-word;">
-<?php
   function date_fran()
   {
   $mois = array("Janvier", "Février", "Mars",
@@ -40,12 +37,8 @@ License : GNU GPL v3
 		$date = date_fran()." à ". date("G:i:s");
 		$pseudo = htmlspecialchars($_POST['pseudo']);
 		$msg = htmlspecialchars($_POST['msg']);
-		$bdd = new PDO("mysql:host=CHANGEME;dbname=CHANGEME", "CHANGEME", 
-
-"CHANGEME");
-		$req = $bdd->prepare('INSERT INTO livre_or(pseudo,msg,date) VALUES
-
-(:pseudo,:msg,:date)');
+		$bdd = new PDO("mysql:host=changeme;dbname=changeme", "changeme", "changeme");
+		$req = $bdd->prepare('INSERT INTO livre_or(pseudo,msg,date) VALUES(:pseudo,:msg,:date)');
 		$req->execute(array(
 			'pseudo' => $pseudo,
 			'msg' => $msg,
@@ -62,18 +55,17 @@ License : GNU GPL v3
 }
 	else
 	{
-	$connexion = new PDO("mysql:host=CHANGEME;dbname=CHANGEME", "CHANGEME", "CHANGEME");
+	$connexion = new PDO("mysql:host=changeme;dbname=changeme", "changeme",  "changeme");
 	$reponse = $connexion->query("SELECT id,pseudo,msg, date FROM livre_or ORDER BY id DESC");
 	while ($donnees = $reponse->fetch())
 	  {
 	?>
-<b><font color="green"><?php echo $donnees['pseudo']; ?></font></b> : <?php echo $donnees['msg']; ?>
+<div style="max-width:100%; min-height:40px; word-wrap:break-word; margin-bottom:5px;"><b><font color="green"><?php echo $donnees['pseudo']; ?></font></b> : <?php echo $donnees['msg']; ?>
 <div style="margin-left:60%;"><p style="font-size:12px;"><i><?php echo $donnees['date']; ?></i></p></div>
 <?php
     }
 	}
 ?>
-</div>
 <br />
 <form action="" method="post">
 <strong>Pseudo</strong> : <input type="text" name="pseudo" /><br />
