@@ -1,10 +1,22 @@
-<?php
+﻿<?php
 /*
 Description : Script livre d'or avec antispam simple
 Auteur : Mathieu BIHAN pour Vibrations Libres
 URL : http://vibrationslibres.fr
-Licence : GNU GPL v2
+License : GNU GPL v2
 */
+?>
+
+<form action="" method="post">
+<strong>Pseudo</strong> : <input type="text" name="pseudo" /><br />
+<strong>Message</strong> : <input type="text" name="msg" /><br />
+<strong>Antispam</strong> | Ecrire 3 en lettres minuscules <input type="text" name="spam" /><br />
+<input type="submit" name="envoi" value="Envoyer" /><br />
+</form>
+<br />
+<?php if(isset($_GET['e']) AND $_GET['e'] == "y") { echo "<br /><font color='red'>Donn&eacute;es manquantes !</font><br />"; } ?>
+<?php if(isset($_GET['e']) AND $_GET['e'] == "spam") { echo "<br /><font color='red'>Erreur dans la r&eacute;ponse &agrave; l'antispam !</font><br />"; } ?>
+<?php
   function date_fran()
   {
   $mois = array("Janvier", "Février", "Mars",
@@ -37,7 +49,7 @@ Licence : GNU GPL v2
 		$date = date_fran()." à ". date("G:i:s");
 		$pseudo = htmlspecialchars($_POST['pseudo']);
 		$msg = htmlspecialchars($_POST['msg']);
-		$bdd = new PDO("mysql:host=changeme;dbname=changeme", "changeme", "changeme");
+		$bdd = new PDO("mysql:host=changemoi;dbname=changemoi", "changemoi", "changemoi");
 		$req = $bdd->prepare('INSERT INTO livre_or(pseudo,msg,date) VALUES(:pseudo,:msg,:date)');
 		$req->execute(array(
 			'pseudo' => $pseudo,
@@ -55,7 +67,7 @@ Licence : GNU GPL v2
 }
 	else
 	{
-	$connexion = new PDO("mysql:host=changeme;dbname=changeme", "changeme",  "changeme");
+	$connexion = new PDO("mysql:host=changemoi;dbname=changemoi", "changemoi",  "changemoi");
 	$reponse = $connexion->query("SELECT id,pseudo,msg, date FROM livre_or ORDER BY id DESC");
 	while ($donnees = $reponse->fetch())
 	  {
@@ -66,12 +78,3 @@ Licence : GNU GPL v2
     }
 	}
 ?>
-<br />
-<form action="" method="post">
-<strong>Pseudo</strong> : <input type="text" name="pseudo" /><br />
-<strong>Message</strong> : <input type="text" name="msg" /><br />
-<strong>Antispam</strong> | Ecrire 3 en lettres minuscules <input type="text" name="spam" /><br />
-<input type="submit" name="envoi" value="Envoyer" /><br />
-</form>
-<?php if(isset($_GET['e']) AND $_GET['e'] == "y") { echo "<font color='red'>Donn&eacute;es manquantes !</font><br />"; } ?>
-<?php if(isset($_GET['e']) AND $_GET['e'] == "spam") { echo "<font color='red'>Erreur dans la r&eacute;ponse &agrave; l'antispam !</font><br />"; } ?>
