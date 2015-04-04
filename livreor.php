@@ -1,7 +1,7 @@
 ﻿<?php
 /*
 Description : Script livre d'or avec antispam simple
-Auteur : Mathieu BIHAN pour Vibrations Libres
+Auteur : Niblischim pour Vibrations Libres
 URL : http://vibrationslibres.fr
 License : GNU GPL v2
 */
